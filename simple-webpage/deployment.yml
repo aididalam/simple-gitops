@@ -5,10 +5,18 @@ metadata:
   labels:
     app: simple-webpage
 spec:
-  replicas: 2
+  replicas: 3
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+
   selector:
     matchLabels:
       app: simple-webpage
+
   template:
     metadata:
       labels:
@@ -19,6 +27,14 @@ spec:
           image: aididalam/simple-webpage:main-7
           ports:
             - containerPort: 80
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
           resources:
             requests:
               cpu: "50m"
