@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: simple-webpage
-          image: aididalam/simple-webpage:main-7
+          image: aididalam/simple-webpage:main-8
           ports:
             - containerPort: 80
 
